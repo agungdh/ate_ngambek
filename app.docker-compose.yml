@@ -12,7 +12,7 @@ services:
     depends_on:
       - base
     volumes:
-      - app_data:/var/www/html:ro
+      - app_data:/var/www/html
       - fpm_sock:/run/php
   nginx:
     image: agungdh/ate_ngambek:latest-nginx
@@ -22,8 +22,8 @@ services:
     depends_on:
       - fpm
     volumes:
-      - app_data:/var/www/html:ro
-      - fpm_sock:/run/php:ro
+      - app_data:/var/www/html
+      - fpm_sock:/run/php
 volumes:
   app_data:
   fpm_sock:

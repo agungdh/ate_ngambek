@@ -25,6 +25,5 @@ WORKDIR /var/www/html
 
 USER root
 EXPOSE 80
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 CMD ["nginx","-g","daemon off;"]
 

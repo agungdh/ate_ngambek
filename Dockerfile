@@ -84,5 +84,9 @@ WORKDIR /var/www/html
 
 COPY --from=builder --chown=www-data:www-data /var/www/html /var/www/html
 
+RUN chmod 777 storage/framework/ -R
+RUN chmod 777 storage/logs/ -R
+RUN chmod 777 bootstrap/cache/ -R
+
 EXPOSE 80
 CMD ["lighttpd","-D","-f","/etc/lighttpd/lighttpd.conf"]
