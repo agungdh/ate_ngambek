@@ -30,3 +30,5 @@ COPY composer.json composer.lock ./
 RUN set -eux; \
   composer install --prefer-dist --no-interaction --no-progress \
                    --no-autoloader --no-scripts
+
+CMD ["bash"]
