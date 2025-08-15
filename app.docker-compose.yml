@@ -12,3 +12,9 @@ services:
     volumes:
       - .env:/var/www/html/.env
     command: ["php", "/var/www/html/artisan", "queue:work", "--sleep=3", "--tries=3"]
+  scheduler:
+    image: agungdh/ate_ngambek:latest
+    restart: always
+    volumes:
+      - .env:/var/www/html/.env
+    command: ["php", "artisan", "schedule:work", "--no-interaction"]
