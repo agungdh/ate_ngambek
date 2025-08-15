@@ -1,29 +1,8 @@
 services:
-  base:
+  app:
     image: agungdh/ate_ngambek:latest
     restart: always
     ports:
-      - "8100:80"
+      - "8000:8000"
     volumes:
-      - app_data:/var/www/html
-  fpm:
-    image: agungdh/ate_ngambek:latest-fpm
-    restart: always
-    depends_on:
-      - base
-    volumes:
-      - app_data:/var/www/html
-      - fpm_sock:/run/php
-  nginx:
-    image: agungdh/ate_ngambek:latest-nginx
-    restart: always
-    ports:
-      - "8180:80"
-    depends_on:
-      - fpm
-    volumes:
-      - app_data:/var/www/html
-      - fpm_sock:/run/php
-volumes:
-  app_data:
-  fpm_sock:
+      - .env:/var/www/html/.env
