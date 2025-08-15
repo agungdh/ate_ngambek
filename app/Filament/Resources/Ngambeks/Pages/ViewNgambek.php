@@ -3,19 +3,17 @@
 namespace App\Filament\Resources\Ngambeks\Pages;
 
 use App\Filament\Resources\Ngambeks\NgambekResource;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\ViewAction;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Actions\EditAction;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditNgambek extends EditRecord
+class ViewNgambek extends ViewRecord
 {
     protected static string $resource = NgambekResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
-            DeleteAction::make(),
+            EditAction::make(),
         ];
     }
 }

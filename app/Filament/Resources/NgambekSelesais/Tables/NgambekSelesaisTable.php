@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Ngambeks\Tables;
+namespace App\Filament\Resources\NgambekSelesais\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -9,18 +9,19 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class NgambeksTable
+class NgambekSelesaisTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
+                TextColumn::make('ngambek_id')
+                    ->numeric()
+                    ->sortable(),
                 TextColumn::make('kapan')
                     ->dateTime()
                     ->sortable(),
-                TextColumn::make('kenapa')
-                    ->searchable(),
-                TextColumn::make('siapa')
+                TextColumn::make('gimana')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Ngambeks\Pages;
+namespace App\Filament\Resources\NgambekSelesais\Pages;
 
-use App\Filament\Resources\Ngambeks\NgambekResource;
+use App\Filament\Resources\NgambekSelesais\NgambekSelesaiResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditNgambek extends EditRecord
+class EditNgambekSelesai extends EditRecord
 {
-    protected static string $resource = NgambekResource::class;
+    protected static string $resource = NgambekSelesaiResource::class;
 
     protected function getHeaderActions(): array
     {

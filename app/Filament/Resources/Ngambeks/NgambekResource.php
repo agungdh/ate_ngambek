@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Ngambeks;
 use App\Filament\Resources\Ngambeks\Pages\CreateNgambek;
 use App\Filament\Resources\Ngambeks\Pages\EditNgambek;
 use App\Filament\Resources\Ngambeks\Pages\ListNgambeks;
+use App\Filament\Resources\Ngambeks\Pages\ViewNgambek;
 use App\Filament\Resources\Ngambeks\Schemas\NgambekForm;
+use App\Filament\Resources\Ngambeks\Schemas\NgambekInfolist;
 use App\Filament\Resources\Ngambeks\Tables\NgambeksTable;
 use App\Models\Ngambek;
 use BackedEnum;
@@ -20,14 +22,14 @@ class NgambekResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'kenapa';
-
-    /**
-     * @throws \Exception
-     */
     public static function form(Schema $schema): Schema
     {
         return NgambekForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return NgambekInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -47,6 +49,7 @@ class NgambekResource extends Resource
         return [
             'index' => ListNgambeks::route('/'),
             'create' => CreateNgambek::route('/create'),
+            'view' => ViewNgambek::route('/{record}'),
             'edit' => EditNgambek::route('/{record}/edit'),
         ];
     }
