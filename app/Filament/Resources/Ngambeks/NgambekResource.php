@@ -22,6 +22,9 @@ class NgambekResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'kenapa';
 
+    /**
+     * @throws \Exception
+     */
     public static function form(Schema $schema): Schema
     {
         return NgambekForm::configure($schema);
