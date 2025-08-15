@@ -39,24 +39,12 @@ USER www-data
 
 WORKDIR /var/www/html
 
-COPY . .
-
-USER root
-
-RUN set -eux; \
-  install -d -m 0775 -o www-data -g www-data \
-    storage storage/logs \
-    storage/framework storage/framework/cache storage/framework/sessions storage/framework/views \
-    bootstrap/cache; \
-  chown -R www-data:www-data storage bootstrap/cache;
-
-USER www-data
+COPY --chown=www-data:www-data . .
 
 RUN composer install
 
 RUN npm ci
 
 RUN npm run build
-
 
 CMD ["sleep", "infinity"]
