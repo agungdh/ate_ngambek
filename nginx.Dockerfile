@@ -17,6 +17,8 @@ RUN set -eux; \
     nginx; \
   rm -rf /var/lib/apt/lists/*
 
+COPY docker/nginx.conf /etc/nginx/sites-available/default
+
 USER www-data
 
 WORKDIR /var/www/html
@@ -24,4 +26,5 @@ WORKDIR /var/www/html
 USER root
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-CMD ["nginx"]
+CMD ["nginx","-g","daemon off;"]
+
