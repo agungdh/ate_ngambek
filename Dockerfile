@@ -61,6 +61,14 @@ FROM alpine AS runtime
 
 ENV TZ=Asia/Jakarta
 
+# install lighttpd + modul fastcgi
+RUN set -eux; \
+  apk add --no-cache lighttpd
+
 WORKDIR /var/www/html
 
 COPY --from=builder --chown=www-data:www-data /var/www/html /var/www/html
+
+EXPOSE 80
+
+CMD ["lighttpd","-D"]
