@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('ngambek_id')->unique()->constrained()->cascadeOnDelete()->restrictOnUpdate();
             $table->timestampTz('kapan');
             $table->string('gimana');
-            $table->timestampsTz();
+            $table->timestamps();
         });
     }
 

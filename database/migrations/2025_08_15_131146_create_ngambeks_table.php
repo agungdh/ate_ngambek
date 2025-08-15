@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestampTz('kapan');
             $table->string('kenapa');
             $table->string('siapa')->nullable();
-            $table->timestampsTz();
+            $table->timestamps();
         });
     }
 
