@@ -52,4 +52,7 @@ RUN php artisan storage:link
 RUN rm -rf node_modules
 
 EXPOSE 8000
-CMD ["php","artisan","octane:start"]
+
+COPY --chown=www-data:www-data start.sh /usr/local/bin/start
+RUN chmod +x /usr/local/bin/start
+CMD ["/usr/local/bin/start"]
