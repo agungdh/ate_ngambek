@@ -14,7 +14,7 @@ RUN set -eux; \
     ca-certificates curl gnupg tzdata unzip zip 7zip wget git bash; \
   rm -rf /var/lib/apt/lists/*
 
-# ---- PHP 8.4 FPM + extensions (dari repo Debian trixie) ----
+# ---- PHP 8.4 + extensions (dari repo Debian trixie) ----
 RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
