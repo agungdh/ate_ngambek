@@ -68,8 +68,8 @@ RUN set -eux; \
   cat > /etc/lighttpd/lighttpd.conf <<'EOF'
 server.document-root = "/var/www/dummy"
 server.port = 80
-server.username = "lighttpd"
-server.groupname = "lighttpd"
+server.username = "www-data"
+server.groupname = "www-data"
 dir-listing.activate = "disable"
 index-file.names = ( "index.html" )
 EOF
