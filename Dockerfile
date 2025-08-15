@@ -1,4 +1,9 @@
-FROM debian:trixie
+# syntax=docker/dockerfile:1.7
+
+############################
+# STAGE 1: Build (Debian)
+############################
+FROM debian:trixie AS builder
 
 ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Jakarta
 
@@ -49,4 +54,13 @@ RUN npm run build
 
 RUN php artisan storage:link
 
-CMD ["php", "artisan", "serve"]
+############################
+# STAGE 2: Runtime (Alpine)
+############################
+FROM alpine AS runtime
+
+ENV TZ=Asia/Jakarta
+
+WORKDIR /var/www/html
+
+COPY --from=builder --chown=www-data:www-data /var/www/html /var/www/html
