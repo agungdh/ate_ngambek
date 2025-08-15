@@ -2,6 +2,8 @@ services:
   adminer:
     image: adminer
     restart: always
+    environment:
+        TZ: Asia/Jakarta
     ports:
       - "127.0.0.1:8083:8080"
   postgres:
@@ -9,6 +11,7 @@ services:
     container_name: postgres_db
     restart: always
     environment:
+      TZ: Asia/Jakarta
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: ate_ngambek
@@ -16,16 +19,5 @@ services:
       - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@email.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "127.0.0.1:5050:80"
-    depends_on:
-      - postgres
 volumes:
   postgres_data:

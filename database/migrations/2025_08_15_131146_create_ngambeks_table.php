@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('ngambeks', function (Blueprint $table) {
+            $table->id();
+            $table->timestampTz('kapan');
+            $table->string('kenapa');
+            $table->string('siapa')->nullable();
+            $table->timestampsTz();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('ngambeks');
+    }
+};
