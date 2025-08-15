@@ -68,13 +68,14 @@ RUN set -eux; \
   cat > /etc/lighttpd/lighttpd.conf <<'EOF'
 server.document-root = "/var/www/dummy"
 server.port = 80
-server.username = "www-data"
-server.groupname = "www-data"
+server.username = "lighttpd"
+server.groupname = "lighttpd"
 dir-listing.activate = "disable"
 index-file.names = ( "index.html" )
 EOF
 
-RUN mkdir "/var/www/dummy"
+RUN mkdir /var/www/dummy
+RUN chown=lighttpd:lighttpd /var/www/dummy
 RUN echo "eyyow" > index.html
 
 WORKDIR /var/www/html
