@@ -31,7 +31,6 @@ USER www-data
 WORKDIR /var/www/html
 
 USER root
-EXPOSE 9000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 CMD php-fpm8.4 -t || exit 1
 CMD ["php-fpm8.4","-F"]

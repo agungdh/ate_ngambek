@@ -13,14 +13,16 @@ services:
       - base
     volumes:
       - app_data:/var/www/html:ro
+      - ./fpm.sock:/run/php/php8.4-fpm.sock
   nginx:
     image: agungdh/ate_ngambek:latest-nginx
     restart: always
     ports:
       - "8180:80"
     depends_on:
-      - base
+      - fpm
     volumes:
       - app_data:/var/www/html:ro
+      - ./fpm.sock:/run/fpm.sock:ro
 volumes:
   app_data:
