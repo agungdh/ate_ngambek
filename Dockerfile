@@ -42,4 +42,6 @@ RUN set -eux; \
   apt-get install -y --no-install-recommends nodejs; \
   rm -rf /var/lib/apt/lists/*
 
+COPY . .
+
 CMD ["sleep", "infinity"]
