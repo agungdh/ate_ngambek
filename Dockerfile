@@ -1,7 +1,6 @@
 FROM debian:trixie
 
 ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Jakarta
-WORKDIR /var/www/html
 
 # ---- base tools ----
 RUN set -eux; \
@@ -25,12 +24,6 @@ RUN set -eux; \
   php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer; \
   rm -f /tmp/composer-setup.php
 
-# ---- cache layer composer ----
-COPY composer.json composer.lock ./
-RUN set -eux; \
-  composer install --prefer-dist --no-interaction --no-progress \
-                   --no-autoloader --no-scripts
-
 # ---- Node.js 24 (NodeSource) ----
 RUN set -eux; \
   mkdir -p /etc/apt/keyrings; \
@@ -41,6 +34,15 @@ RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends nodejs; \
   rm -rf /var/lib/apt/lists/*
+
+USER www-data
+
+WORKDIR /var/www/html
+
+# ---- cache layer composer ----
+COPY composer.json composer.lock ./
+RUN set -eux; \
+  composer install
 
 COPY . .
 
