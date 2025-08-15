@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Jakarta
 RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
-    ca-certificates curl gnupg tzdata unzip zip 7zip wget fastfetch git bash; \
+    ca-certificates curl gnupg tzdata unzip zip 7zip wget git bash; \
   rm -rf /var/lib/apt/lists/*
 
 # ---- PHP 8.4 FPM + extensions (dari repo Debian trixie) ----
@@ -39,11 +39,13 @@ USER www-data
 
 WORKDIR /var/www/html
 
-# ---- cache layer composer ----
-COPY composer.json composer.lock ./
-RUN set -eux; \
-  composer install
-
 COPY . .
+
+RUN composer install
+
+RUN npm install
+
+RUN npm build
+
 
 CMD ["sleep", "infinity"]
