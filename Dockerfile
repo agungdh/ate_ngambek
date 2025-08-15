@@ -47,4 +47,6 @@ RUN npm ci
 
 RUN npm run build
 
-CMD ["sleep", "infinity"]
+RUN php artisan storage:link
+
+CMD ["php", "artisan", "serve"]
