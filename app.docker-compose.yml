@@ -13,7 +13,7 @@ services:
       - base
     volumes:
       - app_data:/var/www/html:ro
-      - ./fpm.sock:/run/php/php8.4-fpm.sock
+      - fpm_sock:/run/php
   nginx:
     image: agungdh/ate_ngambek:latest-nginx
     restart: always
@@ -23,6 +23,7 @@ services:
       - fpm
     volumes:
       - app_data:/var/www/html:ro
-      - ./fpm.sock:/run/fpm.sock:ro
+      - fpm_sock:/run/php:ro
 volumes:
   app_data:
+  fpm_sock:
