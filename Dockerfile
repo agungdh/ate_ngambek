@@ -1,9 +1,4 @@
-# syntax=docker/dockerfile:1.7
-
-############################
-# STAGE 1: Build (Debian)
-############################
-FROM debian:trixie AS builder
+FROM debian:trixie
 
 ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Jakarta
 
@@ -56,37 +51,5 @@ RUN php artisan storage:link
 
 RUN rm -rf node_modules
 
-############################
-# STAGE 2: Runtime (Alpine)
-############################
-FROM alpine AS runtime
-
-ENV TZ=Asia/Jakarta
-
-# install lighttpd & config minimal
-RUN set -eux; \
-  apk add --no-cache lighttpd tzdata; \
-  mkdir -p /run/lighttpd /var/log/lighttpd; \
-  cat > /etc/lighttpd/lighttpd.conf <<'EOF'
-server.document-root = "/var/www/dummy"
-server.port = 80
-server.username = "lighttpd"
-server.groupname = "lighttpd"
-dir-listing.activate = "disable"
-index-file.names = ( "index.html" )
-EOF
-
-RUN mkdir /var/www/dummy
-RUN echo "eyyow" > /var/www/dummy/index.html
-RUN chown lighttpd:lighttpd /var/www/dummy -R
-
-WORKDIR /var/www/html
-
-COPY --from=builder --chown=www-data:www-data /var/www/html /var/www/html
-
-RUN chmod 777 storage/framework/ -R
-RUN chmod 777 storage/logs/ -R
-RUN chmod 777 bootstrap/cache/ -R
-
-EXPOSE 80
-CMD ["lighttpd","-D","-f","/etc/lighttpd/lighttpd.conf"]
+EXPOSE 8000
+CMD ["php","artisan","octane:start"]
