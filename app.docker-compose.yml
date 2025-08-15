@@ -6,3 +6,9 @@ services:
       - "8000:8000"
     volumes:
       - .env:/var/www/html/.env
+  worker:
+    image: agungdh/ate_ngambek:latest
+    restart: always
+    volumes:
+      - .env:/var/www/html/.env
+    command: ["php", "/var/www/html/artisan", "queue:work", "--sleep=3", "--tries=3"]
