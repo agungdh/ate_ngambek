@@ -11,8 +11,16 @@ class NgambekSelesaiInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('ngambek_id')
-                    ->numeric(),
+                TextEntry::make('ngambek.kapan')
+                    ->label('Kapan Ngambek')
+                    ->dateTime(),
+
+                TextEntry::make('ngambek.kepada')
+                    ->label('Kepada'),
+
+                TextEntry::make('ngambek.siapa')
+                    ->label('Siapa'),
+
                 TextEntry::make('kapan')
                     ->dateTime(),
                 TextEntry::make('gimana'),

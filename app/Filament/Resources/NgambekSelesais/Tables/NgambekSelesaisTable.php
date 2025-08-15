@@ -8,16 +8,30 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-
+use Illuminate\Database\Eloquent\Builder; // <-- tambahkan
 class NgambekSelesaisTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->with('ngambek'))
             ->columns([
-                TextColumn::make('ngambek_id')
-                    ->numeric()
+                // GANTI kolom ngambek_id dengan 3 kolom dari tabel ngambek
+                TextColumn::make('ngambek.kapan')
+                    ->label('Kapan Ngambek')
+                    ->dateTime()
                     ->sortable(),
+
+                TextColumn::make('ngambek.kepada')
+                    ->label('Kepada')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('ngambek.siapa')
+                    ->label('Siapa')
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('kapan')
                     ->dateTime()
                     ->sortable(),
