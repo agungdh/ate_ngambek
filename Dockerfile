@@ -61,14 +61,25 @@ FROM alpine AS runtime
 
 ENV TZ=Asia/Jakarta
 
-# install lighttpd + modul fastcgi
+# install lighttpd & config minimal
 RUN set -eux; \
-  apk add --no-cache lighttpd
+  apk add --no-cache lighttpd tzdata; \
+  mkdir -p /run/lighttpd /var/log/lighttpd; \
+  cat > /etc/lighttpd/lighttpd.conf <<'EOF'
+server.document-root = "/var/www/dummy"
+server.port = 80
+server.username = "lighttpd"
+server.groupname = "lighttpd"
+dir-listing.activate = "disable"
+index-file.names = ( "index.html" )
+EOF
+
+RUN mkdir "/var/www/dummy"
+RUN echo "eyyow" > index.html
 
 WORKDIR /var/www/html
 
 COPY --from=builder --chown=www-data:www-data /var/www/html /var/www/html
 
 EXPOSE 80
-
-CMD ["lighttpd","-D"]
+CMD ["lighttpd","-D","-f","/etc/lighttpd/lighttpd.conf"]
