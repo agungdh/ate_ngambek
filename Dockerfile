@@ -75,8 +75,8 @@ index-file.names = ( "index.html" )
 EOF
 
 RUN mkdir /var/www/dummy
-RUN chown lighttpd:lighttpd /var/www/dummy
-RUN echo "eyyow" > index.html
+RUN echo "eyyow" > /var/www/dummy/index.html
+RUN chown lighttpd:lighttpd /var/www/dummy -R
 
 WORKDIR /var/www/html
 
