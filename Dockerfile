@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Jakarta
 RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
-    ca-certificates curl gnupg tzdata unzip zip 7zip wget git bash; \
+    ca-certificates curl gnupg tzdata unzip zip 7zip wget git bash nano; \
   rm -rf /var/lib/apt/lists/*
 
 # ---- PHP 8.4 + extensions (dari repo Debian trixie) ----

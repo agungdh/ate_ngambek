@@ -1,0 +1,26 @@
+services:
+  base:
+    image: agungdh/ate_ngambek:latest
+    restart: always
+    ports:
+      - "8100:80"
+    volumes:
+      - app_data:/var/www/html
+  fpm:
+    image: agungdh/ate_ngambek:latest-fpm
+    restart: always
+    depends_on:
+      - base
+    volumes:
+      - app_data:/var/www/html:ro
+  nginx:
+    image: agungdh/ate_ngambek:latest-nginx
+    restart: always
+    ports:
+      - "8180:80"
+    depends_on:
+      - base
+    volumes:
+      - app_data:/var/www/html:ro
+volumes:
+  app_data:

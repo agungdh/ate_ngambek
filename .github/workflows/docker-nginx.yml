@@ -1,4 +1,4 @@
-name: Build Docker image FPM
+name: Build Docker image Nginx
 
 on:
   push:

@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Jakarta
 RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
-    ca-certificates curl gnupg tzdata unzip zip 7zip wget git bash; \
+    ca-certificates curl gnupg tzdata unzip zip 7zip wget git bash nano; \
   rm -rf /var/lib/apt/lists/*
 
 # ---- Nginx
@@ -24,4 +24,4 @@ WORKDIR /var/www/html
 USER root
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx"]
