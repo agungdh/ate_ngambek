@@ -49,9 +49,9 @@ RUN set -eux; \
   chown -R www-data:www-data storage bootstrap/cache; \
   composer install
 
-RUN npm install
+RUN npm ci
 
-RUN npm build
+RUN npm run build
 
 
 CMD ["sleep", "infinity"]
