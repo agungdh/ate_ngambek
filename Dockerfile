@@ -54,6 +54,8 @@ RUN npm run build
 
 RUN php artisan storage:link
 
+RUN rm -rf node_modules
+
 ############################
 # STAGE 2: Runtime (Alpine)
 ############################
